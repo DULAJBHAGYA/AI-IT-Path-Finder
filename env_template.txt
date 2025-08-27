@@ -1,0 +1,20 @@
+# Environment Variables Template
+# Copy this file to .env and fill in your actual values
+
+# Google AI Studio API Key (for CV generation)
+GOOGLE_API_KEY=your_google_api_key_here
+
+# Hugging Face Configuration
+HF_USERNAME=your_huggingface_username
+HF_TOKEN=your_huggingface_token_here
+
+# Backend Configuration
+BACKEND_URL=http://localhost:8000
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+
+# Database Configuration (if needed)
+DATABASE_URL=your_database_url_here
+
+# Other API Keys (add as needed)
+# OPENAI_API_KEY=your_openai_key_here
+# ANTHROPIC_API_KEY=your_anthropic_key_here

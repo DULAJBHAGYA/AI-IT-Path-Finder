@@ -174,7 +174,11 @@ export const config = {
 Set environment variables in `PromptingSystem/.env`:
 ```
 GOOGLE_API_KEY=your_api_key_here
+HF_USERNAME=your_huggingface_username
+HF_TOKEN=your_huggingface_token_here
 ```
+
+**⚠️ Security Note**: Never commit API keys or tokens to version control. Use environment variables or `.env` files (which are ignored by git) to store sensitive information.
 
 ## 🧪 Development
 
