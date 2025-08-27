@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Generator - Preview & Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-section {
+            margin-bottom: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            resize: vertical;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .preview-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .preview-btn:hover {
+            background-color: #1e7e34;
+        }
+        .download-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        .clear-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .clear-btn:hover {
+            background-color: #c82333;
+        }
+        .sample-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        .sample-btn:hover {
+            background-color: #545b62;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .loading {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .preview-section {
+            display: none;
+            margin-top: 30px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+        .preview-tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: #f8f9fa;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 5px 5px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .json-display {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        .markdown-display {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .example-text {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .example-text h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 CV Generator - Preview & Download</h1>
+        
+        <div class="example-text">
+            <h3>📝 Sample CV Text</h3>
+            <p>Click the button below to load a sample CV text for testing:</p>
+            <button class="sample-btn" onclick="loadSampleText()">Load Sample CV</button>
+        </div>
+
+        <div class="input-section">
+            <textarea id="cvText" placeholder="Paste your CV text here..."></textarea>
+            
+            <div class="button-group">
+                <button class="preview-btn" onclick="previewCV()">👁️ Preview CV Data</button>
+                <button class="download-btn" onclick="downloadPDF()">📥 Download PDF</button>
+                <button class="clear-btn" onclick="clearText()">🗑️ Clear Text</button>
+            </div>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div id="previewSection" class="preview-section">
+            <h2>📄 CV Preview</h2>
+            <div class="preview-tabs">
+                <button class="tab active" onclick="showTab('json')">JSON Data</button>
+                <button class="tab" onclick="showTab('markdown')">Markdown CV</button>
+            </div>
+            <div id="jsonTab" class="tab-content active">
+                <div id="jsonDisplay" class="json-display"></div>
+            </div>
+            <div id="markdownTab" class="tab-content">
+                <div id="markdownDisplay" class="markdown-display"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function loadSampleText() {
+            const sampleText = `I'm John Doe, a SOFTWARE ENGINEER from New York, USA. Contact me at (+1) 555-123-4567 or john.doe@email.com. I am a passionate and experienced software engineer with 5 years of experience in full-stack development.
+
+My technical skills include Java, Python, JavaScript, React, Node.js, and SQL. I have experience with AWS, Docker, and Git. I am proficient in agile methodologies and have led development teams.
+
+From January 2022 to present, I served as a Senior Software Engineer at TechCorp where I developed and maintained web applications using React and Node.js, collaborated with cross-functional teams to deliver high-quality software, and mentored junior developers.
+
+I completed a Bachelor of Science in Computer Science at University of Technology from 2018 to 2022, where I maintained a GPA of 3.8 and completed several projects including a web-based task management system.
+
+My projects include a React-based e-commerce platform, a Node.js REST API for a mobile app, and a Python data analysis tool for business intelligence.`;
+
+            document.getElementById('cvText').value = sampleText;
+            showStatus('Sample CV text loaded!', 'success');
+        }
+
+        function clearText() {
+            document.getElementById('cvText').value = '';
+            document.getElementById('previewSection').style.display = 'none';
+            showStatus('Text cleared!', 'success');
+        }
+
+        async function previewCV() {
+            const cvText = document.getElementById('cvText').value.trim();
+            
+            if (!cvText) {
+                showStatus('Please enter some CV text first!', 'error');
+                return;
+            }
+
+            showStatus('Extracting CV data... Please wait.', 'loading');
+
+            try {
+                const formData = new FormData();
+                formData.append('cv_text', cvText);
+
+                const response = await fetch(`${API_BASE_URL}/preview-cv`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Display the preview data
+                document.getElementById('jsonDisplay').textContent = JSON.stringify(data.json, null, 2);
+                document.getElementById('markdownDisplay').textContent = data.markdown;
+                
+                // Show the preview section
+                document.getElementById('previewSection').style.display = 'block';
+                
+                showStatus('✅ CV data preview generated successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Preview error:', error);
+                showStatus(`❌ Error previewing CV: ${error.message}`, 'error');
+            }
+        }
+
+        async function downloadPDF() {
+            const cvText = document.getElementById('cvText').value.trim();
+            
+            if (!cvText) {
+                showStatus('Please enter some CV text first!', 'error');
+                return;
+            }
+
+            showStatus('Generating PDF... Please wait.', 'loading');
+
+            try {
+                const formData = new FormData();
+                formData.append('cv_text', cvText);
+
+                const response = await fetch(`${API_BASE_URL}/download-pdf`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Get the PDF blob
+                const blob = await response.blob();
+                
+                // Create download link
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                
+                // Get filename from response headers or use default
+                const contentDisposition = response.headers.get('content-disposition');
+                let filename = 'cv.pdf';
+                if (contentDisposition) {
+                    const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                    if (filenameMatch) {
+                        filename = filenameMatch[1];
+                    }
+                }
+                
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                
+                // Cleanup
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                
+                showStatus('✅ PDF downloaded successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                showStatus(`❌ Error downloading PDF: ${error.message}`, 'error');
+            }
+        }
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Auto-save text to localStorage
+        document.getElementById('cvText').addEventListener('input', function() {
+            localStorage.setItem('cvText', this.value);
+        });
+
+        // Load saved text on page load
+        window.addEventListener('load', function() {
+            const savedText = localStorage.getItem('cvText');
+            if (savedText) {
+                document.getElementById('cvText').value = savedText;
+            }
+        });
+    </script>
+</body>
+</html> 

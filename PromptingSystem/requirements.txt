@@ -1,0 +1,8 @@
+spacy>=3.0.0
+groq>=0.4.0
+reportlab>=3.6.0
+python-dotenv>=0.19.0
+fastapi
+uvicorn
+python-multipart
+textblob>=0.17.1 
