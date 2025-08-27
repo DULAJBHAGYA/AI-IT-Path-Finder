@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+client/node_modules/
 __pycache__/
 *.pyc
 *.pyo
@@ -52,6 +53,9 @@ logs/
 # Build outputs
 dist/
 build/
+client/.next/
+client/dist/
+client/build/
 *.egg-info/
 
 # Temporary files
