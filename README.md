@@ -2,7 +2,7 @@
 
 A comprehensive AI-powered CV generation and optimization system that creates ATS-friendly resumes using advanced language models and modern web technologies.
 
-## 🚀 Overview
+## Overview
 
 AI-IT-Path-Finder is a full-stack application that combines the power of fine-tuned language models with a modern web interface to generate professional, ATS-optimized CVs. The system consists of:
 
@@ -11,30 +11,30 @@ AI-IT-Path-Finder is a full-stack application that combines the power of fine-tu
 - **AI Models**: Custom fine-tuned models for structured CV generation
 - **ATS Optimization**: Built-in scoring and optimization tools
 
-## ✨ Features
+## Features
 
 ### Frontend (Next.js Client)
-- 🤖 **AI-Powered CV Parsing**: Converts unstructured text to structured JSON
-- 📄 **Real-time Preview**: Instant HTML preview of generated CVs
-- 📥 **PDF Download**: Professional PDF generation with proper formatting
-- 🎨 **Modern UI**: Responsive design with dark/light theme support
-- 📊 **ATS Scoring**: Built-in ATS compatibility scoring
-- ⚡ **Real-time Processing**: Direct integration with AI backend
+- **AI-Powered CV Parsing**: Converts unstructured text to structured JSON
+- **Real-time Preview**: Instant HTML preview of generated CVs
+- **PDF Download**: Professional PDF generation with proper formatting
+- **Modern UI**: Responsive design with dark/light theme support
+- **ATS Scoring**: Built-in ATS compatibility scoring
+- **Real-time Processing**: Direct integration with AI backend
 
 ### Backend (Python/FastAPI)
-- 🧠 **Fine-tuned Models**: Custom language models for CV parsing
-- 🔍 **Named Entity Recognition**: Advanced text analysis using spaCy
-- 📝 **Multiple Formats**: JSON, Markdown, and PDF output
-- 🔐 **Secure API**: FastAPI with proper error handling
-- 🌐 **CORS Support**: Cross-origin resource sharing enabled
+- **Fine-tuned Models**: Custom language models for CV parsing
+- **Named Entity Recognition**: Advanced text analysis using spaCy
+- **Multiple Formats**: JSON, Markdown, and PDF output
+- **Secure API**: FastAPI with proper error handling
+- **CORS Support**: Cross-origin resource sharing enabled
 
 ### AI/ML Components
-- 📚 **Model Training**: Jupyter notebooks for model fine-tuning
-- 🎯 **Dataset Processing**: Synthetic data generation and preprocessing
-- 🔧 **Model Merging**: Advanced model merging techniques
-- 📊 **Performance Analysis**: Comprehensive evaluation metrics
+- **Model Training**: Jupyter notebooks for model fine-tuning
+- **Dataset Processing**: Synthetic data generation and preprocessing
+- **Model Merging**: Advanced model merging techniques
+- **Performance Analysis**: Comprehensive evaluation metrics
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 AI-IT-Path-Finder/
@@ -57,7 +57,7 @@ AI-IT-Path-Finder/
 └── README.md                # This file
 ```
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 - **Framework**: Next.js 15 with App Router
@@ -80,7 +80,7 @@ AI-IT-Path-Finder/
 - **Model Merging**: Advanced merging techniques
 - **Evaluation**: Comprehensive metrics and testing
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+ (for frontend)
@@ -138,7 +138,7 @@ AI-IT-Path-Finder/
    python cv_api.py
    ```
 
-## 📖 Usage
+## Usage
 
 ### Web Interface
 1. Navigate to the CV form page
@@ -159,7 +159,7 @@ python ats_friendly_cv_generator.py
 - `POST /download-cv` - Create PDF download
 - `GET /health` - Health check
 
-## 🔧 Configuration
+## Configuration
 
 ### Frontend Configuration
 Update `client/src/lib/config.ts`:
@@ -178,9 +178,9 @@ HF_USERNAME=your_huggingface_username
 HF_TOKEN=your_huggingface_token_here
 ```
 
-**⚠️ Security Note**: Never commit API keys or tokens to version control. Use environment variables or `.env` files (which are ignored by git) to store sensitive information.
+**Security Note**: Never commit API keys or tokens to version control. Use environment variables or `.env` files (which are ignored by git) to store sensitive information.
 
-## 🧪 Development
+## Development
 
 ### Model Training
 - Use the Jupyter notebooks for model fine-tuning
@@ -193,7 +193,7 @@ HF_TOKEN=your_huggingface_token_here
 - Backend: Run individual Python scripts for testing
 - API: Use FastAPI's automatic documentation at `/docs`
 
-## 📊 Performance
+## Performance
 
 The system achieves:
 - **High Accuracy**: Fine-tuned models for precise CV parsing
@@ -201,7 +201,7 @@ The system achieves:
 - **ATS Compatibility**: Optimized formatting for maximum compatibility
 - **Scalable Architecture**: Modular design for easy extension
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -215,18 +215,18 @@ The system achieves:
 - Maintain comprehensive documentation
 - Test thoroughly before submitting PRs
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Google AI Studio for language model access
 - Hugging Face for transformer models
 - Next.js team for the excellent framework
 - FastAPI for the high-performance Python web framework
 
-## 📞 Support
+## Support
 
 For support and questions:
 - Create an issue in the GitHub repository
@@ -235,4 +235,4 @@ For support and questions:
 
 ---
 
-**Made with ❤️ for the AI and IT community**
+**Made with love for the AI and IT community**
